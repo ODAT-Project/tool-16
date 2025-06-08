@@ -1,0 +1,28 @@
+--- Hybrid ResNet-CPH Model Training Report ---
+Dataset Shape (after cleaning): (1856, 27)
+Target Event Column: 'Cardiovascular_mortality'
+Time to Event Column: 'Time_to_CVD_mortality_days'
+
+--- Stage 1: Risk Score Model (ResNet) ---
+  Features used: 2
+  Hyperparameters: Learning Rate=0.001, Epochs=50, HiddenLayers=[64, 32]
+
+--- Stage 2: Cox Proportional Hazards (CPH) Model ---
+  Features used (incl. DL score): 2
+  Linear CPH Features: ['eGFR_mLmin173m2']
+  CPH L2 Penalizer: 0.1
+
+--- CPH Model Summary (Hazard Ratios) ---
+                                 coef  exp(coef)  se(coef)  coef lower 95%  coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%  cmp to         z             p   -log2(p)
+covariate                                                                                                                                                                      
+ResNet_Risk_Score_Covariate  1.155362   3.175172  0.196888        0.769468        1.541256             2.158617             4.670451     0.0  5.868109  4.407921e-09  27.757254
+eGFR_mLmin173m2             -0.080383   0.922763  0.039385       -0.157576       -0.003190             0.854212             0.996815     0.0 -2.040961  4.125471e-02   4.599297
+
+--- Final Model Performance on Test Set ---
+  Concordance Index (C-index): 0.5979
+
+--- End of Report ---
+
+-----------------
+
+--- ODAT Project ---
